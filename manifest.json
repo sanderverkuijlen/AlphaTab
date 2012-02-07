@@ -1,0 +1,13 @@
+{
+    "name": "Kickstart",
+    "version": "0.1",
+    "description": "",
+	"chrome_url_overrides": {
+		"newtab": "pages/newtab.html"
+	},
+	"permissions": [
+		"bookmarks",
+		"management",
+		"chrome://favicon/"
+	]
+}
