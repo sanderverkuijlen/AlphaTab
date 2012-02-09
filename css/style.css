@@ -3,8 +3,17 @@ body{
     background: url('../img/bg_blue_strokes2.jpg');
 	font-family: Segoe UI, arial, sans-serif;
 	font-size: 14px;
-	font-smooth:always;
+	/*font-smooth:always;*/
 	-webkit-font-smoothing: antialiased;
+
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+
+	cursor: default;
 }
     #content{
 		width: 960px;
@@ -15,14 +24,13 @@ body{
 /* Menu */
 	#menu{
 		height: 40px;
-		padding-right: 2.8%;
 	}
 		#menu li{
 			height: inherit;
 			line-height: 40px;
 			width: 40px;
 			float: right;
-			margin-left: 1%;
+			margin-right: 2%;
 			background: rgba(0, 0, 0, 0.5);
 
 			text-align: center;
@@ -54,16 +62,22 @@ body{
 		display: block;
 	}
 		.column{
-			width: 22%;
-			padding: 0 1% 0 1%;
-			margin-right: 1%;
+			width: 21.5%;
+			padding: 0 1%;
+			margin: 0 1%;
 			float: left;
 		}
 		.column.semiwide{
 			width: 30%;
 		}
 		.column.wide{
-			width: 46%;
+			width: 46.5%;
+		}
+		.column:first-child{
+			margin-left: 0;
+		}
+		.column:last-child{
+			margin-right: 0;
 		}
 
 
@@ -72,12 +86,6 @@ body{
 		margin: 25px 0 10px 0;
 		color: #FFF;
 		display: none;
-		-webkit-user-select: none;
-		-khtml-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		-o-user-select: none;
-		user-select: none;
 	}
 		.widget h2{
 			padding: 10px;
@@ -99,6 +107,9 @@ body{
 			text-decoration: none;
 
 			-webkit-transition: background 0.2s linear, border 0.2s linear;
+		}
+		.widget li:first-child a{
+			border: 0;
 		}
 		.widget li:hover a{
 			background: rgba(0, 0, 0, 0.6);
