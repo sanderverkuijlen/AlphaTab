@@ -48,12 +48,25 @@ function enableSortables(){
 		stop: function(){
 		},
 		update: function(){
+
+			$('.column').each(function(col_nr, col){
+
+				$(col).find('.widget').each(function(col_pos, widget_elem){
+
+					var widgetid	= $(widget_elem).data('widgetid');
+					var widget		= getWidget(widgetid);
+
+					widget.col_nr	= col_nr;
+					widget.col_pos	= col_pos;
+
+					saveWidget(widget);
+				});
+			});
 		},
 		receive: function(){
 			//fixColumnHeight();
 
 			//TODO: Update widget location storage
-			a
 			/*
 			$('.widget').each(function(i, folder){
 
