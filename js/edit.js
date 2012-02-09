@@ -1,4 +1,14 @@
 
+$(document).ready(function(){
+
+	$('body.editmode .widget h2').live('click', function(event){
+
+		//Open widget settings
+		alert('open widget settings');
+	});
+});
+
+
 function toggleEditMode(){
 	$('body').toggleClass('editmode');
 	fixColumnHeight();
@@ -10,7 +20,6 @@ function toggleEditMode(){
 		disableSortables();
 	}
 }
-
 
 function fixColumnHeight(){
 
@@ -48,35 +57,27 @@ function enableSortables(){
 		stop: function(){
 		},
 		update: function(){
-
-			$('.column').each(function(col_nr, col){
-
-				$(col).find('.widget').each(function(col_pos, widget_elem){
-
-					var widgetid	= $(widget_elem).data('widgetid');
-					var widget		= getWidget(widgetid);
-
-					widget.col_nr	= col_nr;
-					widget.col_pos	= col_pos;
-
-					saveWidget(widget);
-				});
-			});
+			saveWidgetPositions();
 		},
 		receive: function(){
-			//fixColumnHeight();
-
-			//TODO: Update widget location storage
-			/*
-			$('.widget').each(function(i, folder){
-
-				var folder_id = $(folder).data('folderid');
-				var col_nr = $(folder).closest('.column').data('col_nr');
-
-				localStorage['folder_'+folder_id+'_colnr'] = col_nr;
-			});
-			*/
 		}
+	});
+}
+
+function saveWidgetPositions(){
+
+	$('.column').each(function(col_nr, col){
+
+		$(col).find('.widget').each(function(col_pos, widget_elem){
+
+			var widgetid	= $(widget_elem).data('widgetid');
+			var widget		= getWidget(widgetid);
+
+			widget.col_nr	= col_nr;
+			widget.col_pos	= col_pos;
+
+			saveWidget(widget);
+		});
 	});
 }
 

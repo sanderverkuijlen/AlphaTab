@@ -79,14 +79,11 @@ body{
 		-o-user-select: none;
 		user-select: none;
 	}
-	.widget a{
-		color: inherit;
-		text-decoration: none;
-	}
 		.widget h2{
 			padding: 10px;
 			font-size: 16px;
 			background: rgba(0, 0, 0, 0.7);
+			cursor: pointer;
 		}
 
 
@@ -98,6 +95,8 @@ body{
 			padding: 6px 10px 6px 30px;
 			background: rgba(0, 0, 0, 0.5);
 			border-top: 1px solid rgba(0, 0, 0, 0.1);
+			color: inherit;
+			text-decoration: none;
 
 			-webkit-transition: background 0.2s linear, border 0.2s linear;
 		}
@@ -147,14 +146,17 @@ body{
 		display: none;
 	}
 		.dialog_window{
-			background: white;
+			background-color: white;
 			width: 700px;
 			margin: 100px auto 0;
 			padding: 30px;
 			-webkit-box-shadow: 5px 5px 20px #000;
+			background-image: -webkit-linear-gradient(top left, rgb(255,255,255) 50%, rgb(210, 210, 210) 100%);
 		}
 			.dialog_container{
 				height: 360px;
+				overflow-y: auto;
+				overflow-x: hidden;
 			}
 				.dialog_btn{
 					color: #333;
@@ -172,7 +174,7 @@ body{
 				}
 
 				h1{
-					font-family: Segoe UI Light;
+					font-family: Segoe UI Light, arial, sans-serif;
 					font-size: 28px;
 					margin-bottom: 30px;
 				}

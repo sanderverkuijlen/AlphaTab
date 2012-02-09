@@ -6,6 +6,34 @@ $(document).ready(function(){
 	//Create columns and widgets
 	createColumns();
 	createWidgets();
+
+	$('body:not(.editmode) .widget h2').live('click', function(event){
+
+		//Open alle links in tabs bij middle-click
+		if(event.which == '2'){
+
+			$(this).closest('.widget').find('ul a').each(function(i, link){
+
+				if($(link).prop('href').length > 0){
+
+					window.open($(link).prop('href'));
+				}
+			});
+		}
+		//Collapse/Expand de lijst met links bij left-click
+		else{
+
+			var widget_elem = $(this).closest('.widget');
+			var widget = getWidget(widget_elem.data('widgetid'));
+
+			$(widget_elem).find('ul').toggle('blind', {}, 'fast', function(){
+
+				widget.open = $(this).is(':visible');
+
+				saveWidget(widget);
+			});
+		}
+	});
 });
 
 function createColumns(){
@@ -112,9 +140,7 @@ function createWidget(type, info){
 
 			//Create a kickstart widget
 			widget_html =	'<div class="widget kickstart" data-widgetid="'+widget.id+'">'+
-								'<a href="javascript:;" class="" onclick="folderClick(event,this);">'+
-									'<h2>'+widget.title+'</h2>'+
-								'</a>'+
+								'<h2>'+widget.title+'</h2>'+
 								'<ul class="list" '+(!widget.open ? 'style="display:none;"' : '')+'></ul>'+
 							'</div>'
 
@@ -144,9 +170,7 @@ function createWidget(type, info){
 
 			//Create a folder widget
 			widget_html =	'<div class="widget folder" data-widgetid="'+widget.id+'">'+
-								'<a href="javascript:;" class="" onclick="folderClick(event,this);">'+
-									'<h2>'+info.title+'</h2>'+
-								'</a>'+
+								'<h2>'+info.title+'</h2>'+
 								'<ul class="list" '+(!widget.open ? 'style="display:none;"' : '')+'></ul>'+
 							'</div>';
 
@@ -176,9 +200,7 @@ function createWidget(type, info){
 
 			//Create an apps widget
 			widget_html =	'<div class="widget apps" data-widgetid="'+widget.id+'">'+
-								'<a href="javascript:;" class="" onclick="folderClick(event,this);">'+
-									'<h2>'+widget.title+'</h2>'+
-								'</a>'+
+								'<h2>'+widget.title+'</h2>'+
 								'<ul class="list" '+(!widget.open ? 'style="display:none;"' : '')+'>'+
 									'<li><a href="https://chrome.google.com/webstore"><i><img src="chrome://extension-icon/ahfgeienlihckogmohjhadlkjgocpleb/128/0"></i><b>Chrome Web Store</b></a></li>'+
 								'</ul>'+
@@ -293,25 +315,4 @@ function saveWidget(widget){
 
 	//Localstorage wijzigen
 	localStorage['widgets'] = JSON.stringify(widgets);
-}
-
-
-
-function folderClick(event, src){
-
-	//Open alle links in tabs bij middle-click
-    if(event.which == '2'){
-
-		$(src).closest('.widget').find('ul a').each(function(i, link){
-
-			if($(link).prop('href').length > 0){
-
-				window.open($(link).prop('href'));
-			}
-		});
-    }
-	//Collapse/Expand de lijst met links bij left-click
-	else{
-		var list = $(src).closest('.widget').find('ul').toggle('blind', {}, 'fast');
-	}
 }
