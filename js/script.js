@@ -4,37 +4,26 @@ var widgets = loadWidgets();
 $(document).ready(function(){
 
 	//Create columns and widgets
+	drawBackground();
+
 	createColumns();
 	createWidgets();
-
-	$('body:not(.editmode) .widget h2').live('click', function(event){
-
-		//Open alle links in tabs bij middle-click
-		if(event.which == '2'){
-
-			$(this).closest('.widget').find('ul a').each(function(i, link){
-
-				if($(link).prop('href').length > 0){
-
-					window.open($(link).prop('href'));
-				}
-			});
-		}
-		//Collapse/Expand de lijst met links bij left-click
-		else{
-
-			var widget_elem = $(this).closest('.widget');
-			var widget = getWidget(widget_elem.data('widgetid'));
-
-			$(widget_elem).find('ul').toggle('blind', {}, 'fast', function(){
-
-				widget.open = $(this).is(':visible');
-
-				saveWidget(widget);
-			});
-		}
-	});
 });
+
+function drawBackground(){
+
+	var background_url = '';
+	switch(settings['background_theme']){
+
+		case 'brush_strokes':
+		default:
+			background_url = '../img/bg_blue_strokes2.jpg';
+			break;
+	}
+	console.log('url(\''+background_url+'\') '+settings['background_color']);
+
+	$('body').css('background', 'url(\''+background_url+'\') '+settings['background_color']);
+}
 
 function createColumns(){
 
@@ -111,12 +100,23 @@ function createWidgets(){
 	createWidget('kickstart', {id: -1});
 
 	//Apps
-	createWidget('apps')
+	createWidget('apps');
 
-	//Gmail
+	//mail
+	for(var widget_id in widgets){
+		if(typeof widgets[widget_id] !== 'undefined' && widgets[widget_id].type == 'mail'){
+
+			createWidget('mail', widgets[widget_id]);
+		}
+	}
 
 	//RSS
+	for(var widget_id in widgets){
+		if(typeof widgets[widget_id] !== 'undefined' && widgets[widget_id].type == 'rss'){
 
+			createWidget('rss', widgets[widget_id]);
+		}
+	}
 }
 
 function createWidget(type, info){
@@ -130,6 +130,7 @@ function createWidget(type, info){
 			//Get settings for the kickstart widget
 			widget_defaults = {
 				id:			'kickstart',
+				type:		'kickstart',
 				open:		true,
 				col_nr:		0,
 				col_pos:	0,
@@ -140,7 +141,7 @@ function createWidget(type, info){
 
 			//Create a kickstart widget
 			widget_html =	'<div class="widget kickstart" data-widgetid="'+widget.id+'">'+
-								'<h2>'+widget.title+'</h2>'+
+								'<a href="javascript:;" onclick="clickWidgetHeader(event, this);"><h2>'+widget.title+'</h2></a>'+
 								'<ul class="list" '+(!widget.open ? 'style="display:none;"' : '')+'></ul>'+
 							'</div>'
 
@@ -157,9 +158,10 @@ function createWidget(type, info){
 			break;
 
 		case 'folder':
-			//Get settings for the kickstart widget
+			//Get settings for the folder widget
 			widget_defaults = {
 				id:			'folder_'+info.id,
+				type:		'folder',
 				open:		true,
 				col_nr:		0,
 				col_pos:	0
@@ -170,7 +172,7 @@ function createWidget(type, info){
 
 			//Create a folder widget
 			widget_html =	'<div class="widget folder" data-widgetid="'+widget.id+'">'+
-								'<h2>'+info.title+'</h2>'+
+								'<a href="javascript:;" onclick="clickWidgetHeader(event, this);"><h2>'+info.title+'</h2></a>'+
 								'<ul class="list" '+(!widget.open ? 'style="display:none;"' : '')+'></ul>'+
 							'</div>';
 
@@ -187,9 +189,10 @@ function createWidget(type, info){
 			break;
 
 		case 'apps':
-			//Get settings for the kickstart widget
+			//Get settings for the apps widget
 			widget_defaults = {
 				id:			'apps',
+				type:		'apps',
 				open:		true,
 				col_nr:		0,
 				col_pos:	0,
@@ -200,7 +203,7 @@ function createWidget(type, info){
 
 			//Create an apps widget
 			widget_html =	'<div class="widget apps" data-widgetid="'+widget.id+'">'+
-								'<h2>'+widget.title+'</h2>'+
+								'<a href="javascript:;" onclick="clickWidgetHeader(event, this);"><h2>'+widget.title+'</h2></a>'+
 								'<ul class="list" '+(!widget.open ? 'style="display:none;"' : '')+'>'+
 									'<li><a href="https://chrome.google.com/webstore"><i><img src="chrome://extension-icon/ahfgeienlihckogmohjhadlkjgocpleb/128/0"></i><b>Chrome Web Store</b></a></li>'+
 								'</ul>'+
@@ -220,7 +223,113 @@ function createWidget(type, info){
 					}
 				});
 			});
+			break;
 
+		case 'mail':
+
+			//Get settings for the mail widget
+			widget_defaults = {
+				id:			'mail',
+				type:		'mail',
+				open:		true,
+				col_nr:		0,
+				col_pos:	0,
+				title:		'Mail',
+				feed:		'https://gmail.google.com/gmail/feed/atom'
+				//			'http://rss1.smashingmagazine.com/feed/'
+			};
+			widget = $.extend(widget_defaults, info);
+			saveWidget(widget);
+
+			//Create a mail widget
+			widget_html =	'<div class="widget mail" data-widgetid="'+widget.id+'">'+
+								'<a href="javascript:;" onclick="clickWidgetHeader(event, this);"><h2>'+widget.title+'</h2></a>'+
+								'<ul class="list" '+(!widget.open ? 'style="display:none;"' : '')+'>'+
+									'<li class="empty_message"><span>No unread messages</span></li>'+
+								'</ul>'+
+							'</div>'
+
+			addWidgetToColumn(widget.col_nr, widget.col_pos, widget_html);
+
+			var reloadFeed = function(){
+
+				$.get(widget.feed, {}, function(data, textStatus, xhr){
+
+					var widget_elem = $('.widget[data-widgetid='+widget.id+']');
+
+					$(widget_elem).find('ul.list li:not(.empty_message)').remove();
+
+					if($(data).find('entry').length > 0){
+
+						$(data).find('entry').each(function(i, entry){
+
+							$(widget_elem).find('ul.list .empty_message').hide();
+
+							$(widget_elem).show().find('ul.list').append(
+								'<li><a href="'+$(entry).find('link').attr('href')+'"><b>'+$(entry).find('title').text()+'</b><small><i>'+fixRssDatetime($(entry).find('modified').text())+'</i>'+$(entry).find('author name').text()+'</small></a></li>'
+							);
+						});
+					}
+					else{
+						$(widget_elem).find('ul.list .empty_message').show();
+					}
+				});
+			}
+			setInterval(reloadFeed, 60000);
+			reloadFeed();
+			break;
+
+		case 'rss':
+
+			//Get settings for the mail widget
+			widget_defaults = {
+				id:			'rss_0',
+				type:		'rss',
+				open:		true,
+				col_nr:		0,
+				col_pos:	0,
+				title:		'RSS',
+				feed:		'http://rss1.smashingmagazine.com/feed/'
+			};
+			widget = $.extend(widget_defaults, info);
+			saveWidget(widget);
+
+			//Create a mail widget
+			widget_html =	'<div class="widget rss" data-widgetid="'+widget.id+'">'+
+								'<a href="javascript:;" onclick="clickWidgetHeader(event, this);"><h2>'+widget.title+'</h2></a>'+
+								'<ul class="list" '+(!widget.open ? 'style="display:none;"' : '')+'>'+
+									'<li class="empty_message"><span>This RSS feed is empty</span></li>'+
+								'</ul>'+
+							'</div>'
+
+			addWidgetToColumn(widget.col_nr, widget.col_pos, widget_html);
+
+			var reloadFeed = function(){
+
+				$.get(widget.feed, {}, function(data, textStatus, xhr){
+
+					var widget_elem = $('.widget[data-widgetid='+widget.id+']');
+
+					$(widget_elem).find('ul.list li:not(.empty_message)').remove();
+
+					if($(data).find('entry').length > 0){
+
+						$(data).find('entry').each(function(i, entry){
+
+							$(widget_elem).find('ul.list .empty_message').hide();
+
+							$(widget_elem).show().find('ul.list').append(
+								'<li><a href="'+$(entry).find('link').attr('href')+'"><b>'+$(entry).find('title').text()+'</b><small><i>'+fixRssDatetime($(entry).find('updated').text())+'</i>'+$(entry).find('author name').text()+'</small></a></li>'
+							);
+						});
+					}
+					else{
+						$(widget_elem).find('ul.list .empty_message').show();
+					}
+				});
+			}
+			setInterval(reloadFeed, 60000);
+			reloadFeed();
 			break;
 	}
 }
@@ -315,4 +424,98 @@ function saveWidget(widget){
 
 	//Localstorage wijzigen
 	localStorage['widgets'] = JSON.stringify(widgets);
+}
+
+function clickWidgetHeader(event, source){
+
+	if($('body').hasClass('editmode')){
+
+	}
+	else{
+		//Open alle links in tabs bij middle-click
+		if(event.which == '2'){
+
+			$(source).closest('.widget').find('ul a').each(function(i, link){
+
+				if($(link).prop('href').length > 0){
+
+					window.open($(link).prop('href'));
+				}
+			});
+		}
+		//Collapse/Expand de lijst met links bij left-click
+		else{
+
+			var widget_elem = $(source).closest('.widget');
+			var widget = getWidget(widget_elem.data('widgetid'));
+
+			$(widget_elem).find('ul').toggle('blind', {}, 'fast', function(){
+
+				widget.open = $(widget_elem).find('ul').is(':visible');
+
+				saveWidget(widget);
+			});
+		}
+	}
+}
+
+function addMailWidget(){
+
+	//TODO: Check if the mail widget hasn't been added yet
+
+	var widget = {
+		id:			'mail',
+		type:		'mail',
+		open:		true,
+		col_nr:		0,
+		col_pos:	0,
+		title:		'Mail'
+	};
+	saveWidget(widget);
+
+	//Redraw the columns and widgets
+	createColumns();
+	createWidgets();
+}
+
+function addRssWidget(){
+
+	//Generate a new unique id
+	var count	= 0;
+	var new_id	= 'rss_'+count;
+	var widget	= getWidget(new_id);
+
+	while(!$.isEmptyObject(widget)){
+
+		count++;
+		new_id = 'rss_'+count;
+
+		widget = getWidget(new_id);
+	}
+
+	//Create a new RSS widget
+	var new_widget = {
+		id:			new_id,
+		type:		'rss',
+		open:		true,
+		col_nr:		0,
+		col_pos:	0,
+		title:		'RSS'
+	};
+	saveWidget(new_widget);
+
+	//Redraw the columns and widgets
+	createColumns();
+	createWidgets();
+}
+
+function fixRssDatetime(datetime){
+
+	var d = new Date(datetime);
+	datetime = d.toLocaleDateString()+' - '+d.toLocaleTimeString();
+
+	datetime = datetime.replace(/^[a-z]*,\s/i, '');
+	datetime = datetime.replace(/:[0-9]{2}$/, '');
+
+	return datetime;
 }

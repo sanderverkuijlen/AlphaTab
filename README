@@ -2,13 +2,13 @@ KICKSTART
 
 
 MUST HAVE
+- Settings dialog for individual widgets (show/hide/remove (remove = gmail/rss only), change title, max unread mails, max rss articles, etc)
 
 SHOULD HAVE
-- Edit mode: Folders & bookmarks bewerken
+- Settings dialog for individual bookmarks (show/hide, change title/url)
 - Help pop-up
 
 COULD HAVE
-- Gmail als vakje (https://USERNAME:PASSWORD@gmail.google.com/gmail/feed/atom)
-- RSS readers toevoegen als vakje
+
 
 WANT TO HAVE

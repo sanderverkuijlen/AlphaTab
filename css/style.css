@@ -1,6 +1,5 @@
 
 body{
-    background: url('../img/bg_blue_strokes2.jpg');
 	font-family: Segoe UI, arial, sans-serif;
 	font-size: 14px;
 	/*font-smooth:always;*/
@@ -87,29 +86,37 @@ body{
 		color: #FFF;
 		display: none;
 	}
-		.widget h2{
-			padding: 10px;
-			font-size: 16px;
-			background: rgba(0, 0, 0, 0.7);
-			cursor: pointer;
+		.widget a{
+			color: inherit;
+			text-decoration: none;
 		}
+			.widget h2{
+				padding: 10px;
+				font-size: 16px;
+				background: rgba(0, 0, 0, 0.7);
+				cursor: pointer;
+			}
 
 
-/* Widgets - Folder, Kickstart & Apps */
+/* Widgets */
 	.widget ul {
 	}
+		.widget li span{
+			display: list-item;
+			padding: 6px 10px 9px 10px;
+			background: rgba(0, 0, 0, 0.5);
+			border-top: 1px solid rgba(0, 0, 0, 0.1);
+		}
 		.widget li a{
 			display: list-item;
 			padding: 6px 10px 6px 30px;
 			background: rgba(0, 0, 0, 0.5);
 			border-top: 1px solid rgba(0, 0, 0, 0.1);
-			color: inherit;
-			text-decoration: none;
 
 			-webkit-transition: background 0.2s linear, border 0.2s linear;
 		}
 		.widget li:first-child a{
-			border: 0;
+			border-color: transparent;
 		}
 		.widget li:hover a{
 			background: rgba(0, 0, 0, 0.6);
@@ -128,22 +135,69 @@ body{
 				position: relative;
 				top: -2px;
 				padding-left: 5px;
+
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				max-width: 100%;
+				display: inline-block;
+				height: 16px;
+				margin-bottom: -3px;
 			}
-	/*
-	.widget.folder h2:before,
-	.widget.kickstart h2:before{
-		content:'\e02b';
-		display:inline-block;
-		font-family: 'IconicStroke';
-		margin-right: 5px;
+
+/* Widgets - Mail / RSS */
+	.widget.mail, .widget.rss{
+		display: block;
 	}
-	.widget.apps h2:before{
-		content:'\e059';
-		display:inline-block;
-		font-family: 'IconicStroke';
-		margin-right: 5px;
-	}
-	*/
+		.widget.mail h2:before{
+			content:'\2709';
+			display:inline-block;
+			font-family: 'IconicStroke';
+			width: 16px;
+			height: 15px;
+			margin-right: 5px;
+		}
+		.widget.rss h2:before{
+			content:'\e02d';
+			display:inline-block;
+			font-family: 'IconicStroke';
+			width: 16px;
+			height: 15px;
+			margin-right: 5px;
+		}
+			.widget.mail li a, .widget.rss li a{
+				padding-left: 10px;
+			}
+				.widget.mail li a i, .widget.rss li a i{
+					display: none;
+				}
+				.widget.mail li a b, .widget.rss li a b{
+					padding-left: 0;
+				}
+				.widget.mail li a small, .widget.rss li a small{
+					display: block;
+					font-size: 11px;
+					margin-top: 5px;
+					margin-bottom: 0;
+					color: #BBB;
+
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					max-width: 100%;
+					height: 12px;
+					margin-bottom: -1px;
+				}
+					.widget.mail li a small i, .widget.rss li a small i{
+						margin-left: 0;
+						display: inline-block;
+						display: none;
+						width: 150px;
+					}
+
+			.widget.rss li a:visited{
+				color: #bbb;
+			}
 
 
 /* Dialogs */
@@ -164,39 +218,47 @@ body{
 			-webkit-box-shadow: 5px 5px 20px #000;
 			background-image: -webkit-linear-gradient(top left, rgb(255,255,255) 50%, rgb(210, 210, 210) 100%);
 		}
+
+			.dialog_btn{
+				color: #333;
+				text-decoration: none;
+				font-size: 32px;
+				padding: 10px;
+				margin: -5px;
+			}
+			.dialog_btn:hover{
+				color: #666;
+			}
+			.dialog_closebtn{
+				float: right;
+				font-size: 20px;
+			}
+
+			h1{
+				font-family: Segoe UI Light, arial, sans-serif;
+				font-size: 28px;
+				margin-bottom: 30px;
+			}
+
 			.dialog_container{
 				height: 360px;
 				overflow-y: auto;
 				overflow-x: hidden;
 			}
-				.dialog_btn{
-					color: #333;
-					text-decoration: none;
-					font-size: 32px;
-					padding: 10px;
-					margin: -5px;
-				}
-				.dialog_btn:hover{
-					color: #666;
-				}
-				.dialog_closebtn{
-					float: right;
-					font-size: 20px;
-				}
 
-				h1{
-					font-family: Segoe UI Light, arial, sans-serif;
-					font-size: 28px;
-					margin-bottom: 30px;
+				.dialog_container div{
+					margin-top: 30px;
 				}
-
-				p{
-					margin-bottom: 10px;
+				.dialog_container div:first-child{
+					margin-top: 0;
 				}
+					.dialog_container p{
+						margin-bottom: 10px;
+					}
 
 
 /* Dialogs - Settings */
-	#settings_col_layouts li{
+	#settings_col_layout li{
 		float: left;
 		display: block;
 		border: 1px solid black;
@@ -204,11 +266,50 @@ body{
 		margin: 0 5px;
 		cursor: pointer;
 	}
-		#settings_col_layouts li:first-child{
+		#settings_col_layout li:first-child{
 			margin-left: 0;
 		}
-		#settings_col_layouts li.sel, #settings_col_layouts li:hover{
+		#settings_col_layout li.sel, #settings_col_layout li:hover{
 			background-color: rgba(255, 255, 0, 0.3);
+		}
+
+	#settings_background_color li{
+		float: left;
+		display: block;
+		border: 1px solid black;
+		padding: 5px 5px 3px;
+		margin: 0 5px;
+		cursor: pointer;
+	}
+	#settings_background_color li:first-child{
+		margin-left: 0;
+	}
+	#settings_background_color li.sel, #settings_background_color li:hover{
+		background-color: rgba(255, 255, 0, 0.3);
+	}
+		#settings_background_color li div{
+			width: 30px;
+			height: 30px;
+			margin-bottom: 2px;
+		}
+
+	#settings_background_theme li{
+		float: left;
+		display: block;
+		border: 1px solid black;
+		padding: 5px 5px 3px;
+		margin: 0 5px;
+		cursor: pointer;
+	}
+	#settings_background_theme li:first-child{
+		margin-left: 0;
+	}
+	#settings_background_theme li.sel, #settings_background_theme li:hover{
+		background-color: rgba(255, 255, 0, 0.3);
+	}
+		#settings_background_theme li img{
+			width: 78px;
+			height: 60px;
 		}
 
 
@@ -227,4 +328,9 @@ body{
 			display:inline-block;
 			font-family: 'IconicStroke';
 			margin-right: 5px;
+		}
+
+		.editmode .widget,
+		.editmode .widget ul.list{
+			display: block !important;
 		}

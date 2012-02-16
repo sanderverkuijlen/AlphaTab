@@ -6,6 +6,8 @@
 		"newtab": "pages/newtab.html"
 	},
 	"permissions": [
+		"http://*/*",
+		"https://*/*",
 		"bookmarks",
 		"management",
 		"chrome://favicon/"

@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 
 	//Save "Column Layout" setting on click
-	$('#settings_col_layouts li').click(function(){
+	$('#settings_col_layout li').click(function(){
 
 		var name	= $(this).data('name');
 		var value	= $(this).data('value');
@@ -23,13 +23,41 @@ $(document).ready(function(){
 		//Select the correct setting in the dialog
 		setSelectedSettingsInDialog();
 
-		var new_columns = getNumberOfColumnsInLayout(settings[name]);
-
-		//TODO: Set colnr to 'new_columns-1' for all widgets that have a col_nr => new_columns
-
 		//Redraw the columns and widgets
 		createColumns();
 		createWidgets();
+	});
+
+	//Save "Background color" setting on click
+	$('#settings_background_color li').click(function(){
+
+		var name	= $(this).data('name');
+		var value	= $(this).data('value');
+
+		//Save the changed setting
+		changeSetting(name, value);
+
+		//Select the correct setting in the dialog
+		setSelectedSettingsInDialog();
+
+		//Reset the background
+		drawBackground();
+	});
+
+	//Save "Background theme" setting on click
+	$('#settings_background_theme li').click(function(){
+
+		var name	= $(this).data('name');
+		var value	= $(this).data('value');
+
+		//Save the changed setting
+		changeSetting(name, value);
+
+		//Select the correct setting in the dialog
+		setSelectedSettingsInDialog();
+
+		//Reset the background
+		drawBackground();
 	});
 
 	//Select current settings in settings_dialog
@@ -40,7 +68,9 @@ function loadSettings(){
 
 	var settings = {};
 	var defaults = {
-		column_layout:	4
+		column_layout:		4,
+		background_color:	'blue',
+		background_theme:	'brush_strokes'
 	};
 
 	//Settings ophalen als die er al zijn
@@ -64,26 +94,14 @@ function changeSetting(key, val){
 	localStorage['settings'] = JSON.stringify(settings);
 }
 
-function getNumberOfColumnsInLayout(layout){
-
-	switch(layout){
-
-		case 4:
-			return 4;
-			break;
-		case 2:
-			return 2;
-			break;
-
-		//All other layouts have 3 columns
-		default:
-			return 3;
-			break;
-	}
-}
-
 function setSelectedSettingsInDialog(){
 
 	//Set the 'Column Layout' setting
-	$('#settings_col_layouts li').removeClass('sel').filter('[data-value='+settings['column_layout']+']').addClass('sel');
+	$('#settings_col_layout li').removeClass('sel').filter('[data-value='+settings['column_layout']+']').addClass('sel');
+
+	//Set the 'Background color' setting
+	$('#settings_background_color li').removeClass('sel').filter('[data-value='+settings['background_color']+']').addClass('sel');
+
+	//Set the 'Background color' setting
+	$('#settings_background_theme li').removeClass('sel').filter('[data-value='+settings['background_theme']+']').addClass('sel');
 }
