@@ -5,7 +5,8 @@ $(document).ready(function(){
 
 	//Make "Escape" close dialogs
 	$(window).bind('keyup', function(e){
-		if(e.charCode == 0){
+		console.log(e);
+		if(e.keyCode == 27){
 			$('.dialog_overlay').hide();
 		}
 	});

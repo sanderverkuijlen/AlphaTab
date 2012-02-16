@@ -20,7 +20,6 @@ function drawBackground(){
 			background_url = '../img/bg_blue_strokes2.jpg';
 			break;
 	}
-	console.log('url(\''+background_url+'\') '+settings['background_color']);
 
 	$('body').css('background', 'url(\''+background_url+'\') '+settings['background_color']);
 }
@@ -257,13 +256,11 @@ function createWidget(type, info){
 					url:		widget.feed,
 					success:	function(feed){
 
-						console.log('mail -> succes');
-
 						var widget_elem = $('.widget[data-widgetid='+widget.id+']');
 
 						$(widget_elem).find('ul.list li:not(.empty_message)').remove();
 
-						for(var i = 0; i < feed.items.length && (!settings['max_items'] > 0 || i < settings['max_items']); i++) {
+						for(var i = 0; i < feed.items.length && (!settings['max_items'] > 0 || i < settings['max_items']); i++){
 
 							var item = feed.items[i];
 
@@ -273,10 +270,9 @@ function createWidget(type, info){
 								'<li><a href="'+item.link+'"><b>'+item.title+'</b><small><i>'+fixRssDatetime(item.updated)+'</i>'+item.author+'</small></a></li>'
 							);
 						}
-					},
+					}/*,
 					error:		function(){
-						console.log('mail -> error!');
-					}
+					}*/
 				});
 			}
 			setInterval(reloadFeed, 60000);
@@ -314,15 +310,18 @@ function createWidget(type, info){
 					url:	widget.feed,
 					success:	function(feed){
 
-						console.log('rss -> succes');
-
 						var widget_elem = $('.widget[data-widgetid='+widget.id+']');
 
 						$(widget_elem).find('ul.list li:not(.empty_message)').remove();
 
-						for(var i = 0; i < feed.items.length && (!settings['max_items'] > 0 || i < settings['max_items']); i++) {
+						//TEMP: Feed title moet gewoon editable zijn ipv automatisch
+						$(widget_elem).find('h2').text(feed.title);
+
+						for(var i = 0; i < feed.items.length && (!settings['max_items'] > 0 || i < settings['max_items']); i++){
 
 							var item = feed.items[i];
+
+							console.log(item);
 
 							$(widget_elem).find('ul.list .empty_message').hide();
 
@@ -330,10 +329,9 @@ function createWidget(type, info){
 								'<li><a href="'+item.link+'"><b>'+item.title+'</b><small><i>'+fixRssDatetime(item.updated)+'</i>'+item.author+'</small></a></li>'
 							);
 						}
-					},
+					}/*,
 					error:	function(){
-						console.log('rss -> error!');
-					}
+					}*/
 				});
 			}
 			setInterval(reloadFeed, 60000);
@@ -487,7 +485,7 @@ function addMailWidget(){
 	createWidgets();
 }
 
-function addRssWidget(){
+function addRssWidget(options){
 
 	//Generate a new unique id
 	var count	= 0;
@@ -503,7 +501,7 @@ function addRssWidget(){
 	}
 
 	//Create a new RSS widget
-	var new_widget = {
+	var widget_defaults = {
 		id:			new_id,
 		type:		'rss',
 		open:		true,
@@ -512,7 +510,8 @@ function addRssWidget(){
 		title:		'RSS',
 		max_items:	-1
 	};
-	saveWidget(new_widget);
+	widget_defaults = $.extend(widget_defaults, options);
+	saveWidget(widget_defaults);
 
 	//Redraw the columns and widgets
 	createColumns();

@@ -330,7 +330,6 @@ body{
 			margin-right: 5px;
 		}
 
-		.editmode .widget,
-		.editmode .widget ul.list{
+		.editmode .widget{
 			display: block !important;
 		}
