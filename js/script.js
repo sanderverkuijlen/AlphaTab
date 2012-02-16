@@ -253,25 +253,29 @@ function createWidget(type, info){
 
 			var reloadFeed = function(){
 
-				$.get(widget.feed, {}, function(data, textStatus, xhr){
+				$.getFeed({
+					url:		widget.feed,
+					success:	function(feed){
 
-					var widget_elem = $('.widget[data-widgetid='+widget.id+']');
+						console.log('mail -> succes');
 
-					$(widget_elem).find('ul.list li:not(.empty_message)').remove();
+						var widget_elem = $('.widget[data-widgetid='+widget.id+']');
 
-					if($(data).find('entry').length > 0){
+						$(widget_elem).find('ul.list li:not(.empty_message)').remove();
 
-						$(data).find('entry').each(function(i, entry){
+						for(var i = 0; i < feed.items.length && (!settings['max_items'] > 0 || i < settings['max_items']); i++) {
+
+							var item = feed.items[i];
 
 							$(widget_elem).find('ul.list .empty_message').hide();
 
 							$(widget_elem).show().find('ul.list').append(
-								'<li><a href="'+$(entry).find('link').attr('href')+'"><b>'+$(entry).find('title').text()+'</b><small><i>'+fixRssDatetime($(entry).find('modified').text())+'</i>'+$(entry).find('author name').text()+'</small></a></li>'
+								'<li><a href="'+item.link+'"><b>'+item.title+'</b><small><i>'+fixRssDatetime(item.updated)+'</i>'+item.author+'</small></a></li>'
 							);
-						});
-					}
-					else{
-						$(widget_elem).find('ul.list .empty_message').show();
+						}
+					},
+					error:		function(){
+						console.log('mail -> error!');
 					}
 				});
 			}
@@ -281,7 +285,7 @@ function createWidget(type, info){
 
 		case 'rss':
 
-			//Get settings for the mail widget
+			//Get settings for the rss widget
 			widget_defaults = {
 				id:			'rss_0',
 				type:		'rss',
@@ -294,7 +298,7 @@ function createWidget(type, info){
 			widget = $.extend(widget_defaults, info);
 			saveWidget(widget);
 
-			//Create a mail widget
+			//Create a rss widget
 			widget_html =	'<div class="widget rss" data-widgetid="'+widget.id+'">'+
 								'<a href="javascript:;" onclick="clickWidgetHeader(event, this);"><h2>'+widget.title+'</h2></a>'+
 								'<ul class="list" '+(!widget.open ? 'style="display:none;"' : '')+'>'+
@@ -306,25 +310,29 @@ function createWidget(type, info){
 
 			var reloadFeed = function(){
 
-				$.get(widget.feed, {}, function(data, textStatus, xhr){
+				$.getFeed({
+					url:	widget.feed,
+					success:	function(feed){
 
-					var widget_elem = $('.widget[data-widgetid='+widget.id+']');
+						console.log('rss -> succes');
 
-					$(widget_elem).find('ul.list li:not(.empty_message)').remove();
+						var widget_elem = $('.widget[data-widgetid='+widget.id+']');
 
-					if($(data).find('entry').length > 0){
+						$(widget_elem).find('ul.list li:not(.empty_message)').remove();
 
-						$(data).find('entry').each(function(i, entry){
+						for(var i = 0; i < feed.items.length && (!settings['max_items'] > 0 || i < settings['max_items']); i++) {
+
+							var item = feed.items[i];
 
 							$(widget_elem).find('ul.list .empty_message').hide();
 
 							$(widget_elem).show().find('ul.list').append(
-								'<li><a href="'+$(entry).find('link').attr('href')+'"><b>'+$(entry).find('title').text()+'</b><small><i>'+fixRssDatetime($(entry).find('updated').text())+'</i>'+$(entry).find('author name').text()+'</small></a></li>'
+								'<li><a href="'+item.link+'"><b>'+item.title+'</b><small><i>'+fixRssDatetime(item.updated)+'</i>'+item.author+'</small></a></li>'
 							);
-						});
-					}
-					else{
-						$(widget_elem).find('ul.list .empty_message').show();
+						}
+					},
+					error:	function(){
+						console.log('rss -> error!');
 					}
 				});
 			}
@@ -469,7 +477,8 @@ function addMailWidget(){
 		open:		true,
 		col_nr:		0,
 		col_pos:	0,
-		title:		'Mail'
+		title:		'Mail',
+		max_items:	-1
 	};
 	saveWidget(widget);
 
@@ -500,7 +509,8 @@ function addRssWidget(){
 		open:		true,
 		col_nr:		0,
 		col_pos:	0,
-		title:		'RSS'
+		title:		'RSS',
+		max_items:	-1
 	};
 	saveWidget(new_widget);
 
