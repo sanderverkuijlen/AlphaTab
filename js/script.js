@@ -260,7 +260,7 @@ function createWidget(type, info){
 
 						$(widget_elem).find('ul.list li:not(.empty_message)').remove();
 
-						for(var i = 0; i < feed.items.length && (!widget['max_items'] > 0 || i < widget['max_items']); i++){
+						for(var i = 0; i < feed.items.length && (!settings['max_items'] > 0 || i < settings['max_items']); i++){
 
 							var item = feed.items[i];
 
@@ -317,14 +317,16 @@ function createWidget(type, info){
 						//TEMP: Feed title moet gewoon editable zijn ipv automatisch
 						$(widget_elem).find('h2').text(feed.title);
 
-						for(var i = 0; i < feed.items.length && (!widget['max_items'] > 0 || i < widget['max_items']); i++){
+						for(var i = 0; i < feed.items.length && (!settings['max_items'] > 0 || i < settings['max_items']); i++){
 
 							var item = feed.items[i];
+
+							console.log(item);
 
 							$(widget_elem).find('ul.list .empty_message').hide();
 
 							$(widget_elem).show().find('ul.list').append(
-								'<li><a href="'+item.link+'"><b>'+item.title+'</b>'+(typeof item.author !== 'undefined' ? '<small>'+item.author+'</small>' : '')+'</a></li>'
+								'<li><a href="'+item.link+'"><b>'+item.title+'</b><small><i>'+fixRssDatetime(item.updated)+'</i>'+item.author+'</small></a></li>'
 							);
 						}
 					}/*,

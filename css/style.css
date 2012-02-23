@@ -149,7 +149,6 @@ body{
 	.widget.mail, .widget.rss{
 		display: block;
 	}
-		/*
 		.widget.mail h2:before{
 			content:'\2709';
 			display:inline-block;
@@ -166,7 +165,6 @@ body{
 			height: 15px;
 			margin-right: 5px;
 		}
-		*/
 			.widget.mail li a, .widget.rss li a{
 				padding-left: 10px;
 			}
@@ -198,7 +196,7 @@ body{
 					}
 
 			.widget.rss li a:visited{
-				color: #111;
+				color: #bbb;
 			}
 
 
