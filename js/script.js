@@ -321,8 +321,6 @@ function createWidget(type, info){
 
 							var item = feed.items[i];
 
-							console.log(item);
-
 							$(widget_elem).find('ul.list .empty_message').hide();
 
 							$(widget_elem).show().find('ul.list').append(
