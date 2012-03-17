@@ -245,6 +245,7 @@ function createWidget(type, info){
 								'<a href="javascript:;" onclick="clickWidgetHeader(event, this);"><h2>'+widget.title+'</h2></a>'+
 								'<ul class="list" '+(!widget.open ? 'style="display:none;"' : '')+'>'+
 									'<li class="empty_message"><span>No unread messages</span></li>'+
+									'<li class="login_message" style="display: none;"><a href="https://www.gmail.com"><b>Login required<b></a></li>'+
 								'</ul>'+
 							'</div>'
 
@@ -252,30 +253,35 @@ function createWidget(type, info){
 
 			var reloadFeed = function(){
 
+				var widget_elem = $('.widget[data-widgetid='+widget.id+']');
+
+				$(widget_elem).find('ul.list li:not(.empty_message,.login_message)').remove();
+
+
 				$.getFeed({
 					url:		widget.feed,
 					success:	function(feed){
-
-						var widget_elem = $('.widget[data-widgetid='+widget.id+']');
-
-						$(widget_elem).find('ul.list li:not(.empty_message)').remove();
 
 						for(var i = 0; i < feed.items.length && (!settings['max_items'] > 0 || i < settings['max_items']); i++){
 
 							var item = feed.items[i];
 
-							$(widget_elem).find('ul.list .empty_message').hide();
+							$(widget_elem).find('ul.list .empty_message, ul.list .login_message').hide();
 
 							$(widget_elem).show().find('ul.list').append(
-								'<li><a href="'+item.link+'"><b>'+item.title+'</b><small><i>'+fixRssDatetime(item.updated)+'</i>'+item.author+'</small></a></li>'
+								'<li><a href="'+item.link+'"><b>'+item.title+'</b><small>'+item.author+'</small></a></li>'
 							);
 						}
-					}/*,
-					error:		function(){
-					}*/
+					},
+					error:		function(a,b,c,d){
+						console.log(a,b,c,d);
+
+						$(widget_elem).find('ul.list .empty_message').hide();
+						$(widget_elem).find('ul.list .login_message').show();
+					}
 				});
 			}
-			setInterval(reloadFeed, 60000);
+			setInterval(reloadFeed, 600000);
 			reloadFeed();
 			break;
 
@@ -324,7 +330,7 @@ function createWidget(type, info){
 							$(widget_elem).find('ul.list .empty_message').hide();
 
 							$(widget_elem).show().find('ul.list').append(
-								'<li><a href="'+item.link+'"><b>'+item.title+'</b><small><i>'+fixRssDatetime(item.updated)+'</i>'+item.author+'</small></a></li>'
+								'<li><a href="'+item.link+'"><b>'+item.title+'</b>'+(typeof item.author !== 'undefined' ? '<small>'+item.author+'</small>': '')+'</a></li>'
 							);
 						}
 					}/*,
@@ -332,7 +338,7 @@ function createWidget(type, info){
 					}*/
 				});
 			}
-			setInterval(reloadFeed, 60000);
+			setInterval(reloadFeed, 600000);
 			reloadFeed();
 			break;
 	}
@@ -439,13 +445,18 @@ function clickWidgetHeader(event, source){
 		//Open alle links in tabs bij middle-click
 		if(event.which == '2'){
 
-			$(source).closest('.widget').find('ul a').each(function(i, link){
+			if($(source).closest('.widget').hasClass('mail')){
+				window.open('https://www.gmail.com');
+			}
+			else{
+				$(source).closest('.widget').find('ul a').each(function(i, link){
 
-				if($(link).prop('href').length > 0){
+					if($(link).prop('href').length > 0){
 
-					window.open($(link).prop('href'));
-				}
-			});
+						window.open($(link).prop('href'));
+					}
+				});
+			}
 		}
 		//Collapse/Expand de lijst met links bij left-click
 		else{
@@ -516,6 +527,7 @@ function addRssWidget(options){
 	createWidgets();
 }
 
+/*
 function fixRssDatetime(datetime){
 
 	var d = new Date(datetime);
@@ -526,3 +538,4 @@ function fixRssDatetime(datetime){
 
 	return datetime;
 }
+*/

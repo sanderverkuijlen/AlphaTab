@@ -150,23 +150,23 @@ body{
 		display: block;
 	}
 		.widget.mail h2:before{
-			content:'\2709';
+			/*content:'\2709';
 			display:inline-block;
 			font-family: 'IconicStroke';
 			width: 16px;
 			height: 15px;
-			margin-right: 5px;
+			margin-right: 5px;*/
 		}
 		.widget.rss h2:before{
-			content:'\e02d';
+			/*content:'\e02d';
 			display:inline-block;
 			font-family: 'IconicStroke';
 			width: 16px;
 			height: 15px;
-			margin-right: 5px;
+			margin-right: 5px;*/
 		}
 			.widget.mail li a, .widget.rss li a{
-				padding-left: 10px;
+				padding: 8px 10px 7px;
 			}
 				.widget.mail li a i, .widget.rss li a i{
 					display: none;
@@ -219,32 +219,63 @@ body{
 			background-image: -webkit-linear-gradient(top left, rgb(255,255,255) 50%, rgb(210, 210, 210) 100%);
 		}
 
-			.dialog_btn{
+			.dialog_btn,
+			.dialog_backbtn{
 				color: #333;
 				text-decoration: none;
 				font-size: 32px;
 				padding: 10px;
 				margin: -5px;
+				-webkit-transition: color 0.25s linear;
 			}
-			.dialog_btn:hover{
+			.dialog_btn:hover,
+			.dialog_backbtn:hover{
 				color: #666;
+				-webkit-transition: none;
 			}
 			.dialog_closebtn{
 				float: right;
 				font-size: 20px;
 			}
+			.dialog_btn.disabled,
+			.dialog_btn.disabled:hover,
+			.dialog_backbtn.disabled,
+			.dialog_backbtn.disabled:hover{
+				color: #ddd;
+				cursor: default;
+			}
 
-			h1{
+			.dialog_window h1{
 				font-family: Segoe UI Light, arial, sans-serif;
 				font-size: 28px;
 				margin-bottom: 30px;
 			}
 
 			.dialog_container{
-				height: 360px;
+				height: 332px;
 				overflow-y: auto;
 				overflow-x: hidden;
+				margin-right: 6px;
+				margin-bottom: 28px;
 			}
+			.dialog_container::-webkit-scrollbar{
+				width: 6px;
+			}
+			.dialog_container::-webkit-scrollbar-track{
+				border-radius: 5px;
+				background: #bbb;
+			}
+			.dialog_container::-webkit-scrollbar-thumb{
+				border-radius: 5px;
+				background: #555;
+			}
+				.dialog_container .dialog_page{
+					margin: 0;
+					display: none;
+				}
+				.dialog_container .dialog_page.default{
+					display: block
+				}
 
 				.dialog_container div{
 					margin-top: 30px;
@@ -252,8 +283,40 @@ body{
 				.dialog_container div:first-child{
 					margin-top: 0;
 				}
+					.dialog_container h2{
+						font-family: Segoe UI Light, arial, sans-serif;
+						font-size: 20px;
+						margin-bottom: 10px;
+					}
 					.dialog_container p{
 						margin-bottom: 10px;
+					}
+					.dialog_container a.btn{
+						color: #444;
+						padding: 6px 10px 7px 0;
+						display: block;
+						margin-top: 5px;
+						width: 120px;
+						text-align: left;
+						text-decoration: underline;
+					}
+					.dialog_container a.btn:hover{
+						color: #666;
+						text-decoration: none;
+					}
+					.dialog_container a.btn.personalize:before{
+						content: '\e01b';
+						display:inline-block;
+						font-family: 'IconicStroke';
+						margin-right: 5px;
+						font-size: 15px;
+					}
+					.dialog_container a.btn.addwidget:before{
+						content: '\2795';
+						display:inline-block;
+						font-family: 'IconicStroke';
+						margin-right: 5px;
+						font-size: 15px;
 					}
 
 

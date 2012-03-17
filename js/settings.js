@@ -3,15 +3,6 @@ var settings = loadSettings();
 
 $(document).ready(function(){
 
-	//Make "Escape" close dialogs
-	$(window).bind('keyup', function(e){
-		console.log(e);
-		if(e.keyCode == 27){
-			$('.dialog_overlay').hide();
-		}
-	});
-
-
 	//Save "Column Layout" setting on click
 	$('#settings_col_layout li').click(function(){
 
