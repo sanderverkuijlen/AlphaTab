@@ -30,49 +30,49 @@ function createColumns(){
 
 		case 4:
 			$('#column_area').html(
-				'<div class="column" data-col_nr="0">&nbsp;</div>'+
-				'<div class="column" data-col_nr="1">&nbsp;</div>'+
-				'<div class="column" data-col_nr="2">&nbsp;</div>'+
-				'<div class="column" data-col_nr="3">&nbsp;</div>'
+				'<div class="column" data-col_nr="0"></div>'+
+				'<div class="column" data-col_nr="1"></div>'+
+				'<div class="column" data-col_nr="2"></div>'+
+				'<div class="column" data-col_nr="3"></div>'
 			);
 			break;
 
 		case 3:
 			$('#column_area').html(
-				'<div class="column semiwide" data-col_nr="0">&nbsp;</div>'+
-				'<div class="column semiwide" data-col_nr="1">&nbsp;</div>'+
-				'<div class="column semiwide" data-col_nr="2">&nbsp;</div>'
+				'<div class="column semiwide" data-col_nr="0"></div>'+
+				'<div class="column semiwide" data-col_nr="1"></div>'+
+				'<div class="column semiwide" data-col_nr="2"></div>'
 			);
 			break;
 
 		case 2:
 			$('#column_area').html(
-				'<div class="column wide" data-col_nr="0">&nbsp;</div>'+
-				'<div class="column wide" data-col_nr="1">&nbsp;</div>'
+				'<div class="column wide" data-col_nr="0"></div>'+
+				'<div class="column wide" data-col_nr="1"></div>'
 			);
 			break;
 
 		case 'left_large':
 			$('#column_area').html(
-				'<div class="column wide" data-col_nr="0">&nbsp;</div>'+
-				'<div class="column" data-col_nr="1">&nbsp;</div>'+
-				'<div class="column" data-col_nr="2">&nbsp;</div>'
+				'<div class="column wide" data-col_nr="0"></div>'+
+				'<div class="column" data-col_nr="1"></div>'+
+				'<div class="column" data-col_nr="2"></div>'
 			);
 			break;
 
 		case 'middle_large':
 			$('#column_area').html(
-				'<div class="column" data-col_nr="0">&nbsp;</div>'+
-				'<div class="column wide" data-col_nr="1">&nbsp;</div>'+
-				'<div class="column" data-col_nr="2">&nbsp;</div>'
+				'<div class="column" data-col_nr="0"></div>'+
+				'<div class="column wide" data-col_nr="1"></div>'+
+				'<div class="column" data-col_nr="2"></div>'
 			);
 			break;
 
 		case 'right_large':
 			$('#column_area').html(
-				'<div class="column" data-col_nr="0">&nbsp;</div>'+
-				'<div class="column" data-col_nr="1">&nbsp;</div>'+
-				'<div class="column wide" data-col_nr="2">&nbsp;</div>'
+				'<div class="column" data-col_nr="0"></div>'+
+				'<div class="column" data-col_nr="1"></div>'+
+				'<div class="column wide" data-col_nr="2"></div>'
 			);
 			break;
 	}
@@ -273,9 +273,7 @@ function createWidget(type, info){
 							);
 						}
 					},
-					error:		function(a,b,c,d){
-						console.log(a,b,c,d);
-
+					error:		function(){
 						$(widget_elem).find('ul.list .empty_message').hide();
 						$(widget_elem).find('ul.list .login_message').show();
 					}
@@ -323,7 +321,7 @@ function createWidget(type, info){
 						//TEMP: Feed title moet gewoon editable zijn ipv automatisch
 						$(widget_elem).find('h2').text(feed.title);
 
-						for(var i = 0; i < feed.items.length && (!settings['max_items'] > 0 || i < settings['max_items']); i++){
+						for(var i = 0; i < feed.items.length && (!widget['max_items'] > 0 || i < widget['max_items']); i++){
 
 							var item = feed.items[i];
 
@@ -393,6 +391,10 @@ function addWidgetToColumn(col_nr, col_pos, widget_html){
 				return false;
 			}
 		});
+	}
+	else{
+		$(column).prepend(widget_html);
+		placed = true;
 	}
 
 	if(!placed){
@@ -517,7 +519,7 @@ function addRssWidget(options){
 		col_nr:		0,
 		col_pos:	0,
 		title:		'RSS',
-		max_items:	-1
+		max_items:	5
 	};
 	widget_defaults = $.extend(widget_defaults, options);
 	saveWidget(widget_defaults);

@@ -1,18 +1,20 @@
 
 function openDialog(dialog_id){
-			$('body').css('overflow', 'hidden');
+	$('body').css('overflow-y', 'hidden');
+	$('body').css('padding-right', '18px');
 
-			var dialog = $('#'+dialog_id);
+	var dialog = $('#'+dialog_id);
 
-			dialog.find('.dialog_page').hide();
-			dialog.find('.dialog_page.default').show();
-			dialog.find('.dialog_backbtn').addClass('disabled');
+	dialog.find('.dialog_page').hide();
+	dialog.find('.dialog_page.default').show();
+	dialog.find('.dialog_backbtn').addClass('disabled');
 
-			dialog.show();
-		}
+	dialog.show();
+}
 
 function closeDialog(dialog_id){
-	$('body').css('overflow', 'auto');
+	$('body').css('overflow-y', 'scroll');
+	$('body').css('padding-right', '0');
 
 	if(dialog_id != null){
 		$('#'+dialog_id).hide();

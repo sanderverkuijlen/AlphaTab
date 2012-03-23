@@ -13,23 +13,27 @@ body{
 	user-select: none;
 
 	cursor: default;
+	overflow-y:scroll;
 }
+
     #content{
-		width: 960px;
+		width: 940px;
 		margin: 0 auto;
     }
 
 
 /* Menu */
 	#menu{
-		height: 40px;
+		height: 30px;
+		width: 940px;
+		margin: 0 auto;
 	}
 		#menu li{
 			height: inherit;
-			line-height: 40px;
-			width: 40px;
+			line-height: 30px;
+			width: 30px;
 			float: right;
-			margin-right: 2%;
+			margin-right: 5px;
 			background: rgba(0, 0, 0, 0.5);
 
 			text-align: center;
@@ -42,35 +46,35 @@ body{
 			#menu li a{
 				color: #FFF;
 				text-decoration: none;
-				font-size: 20px;
+				font-size: 15px;
 			}
 			#menu li a.info{
-				padding: 0 14px 0 15px;
+				padding: 0 9px 0 10px;
 			}
 			#menu li a.cog{
-				padding: 0 9px 0 10px;
+				padding: 0 6px 0 7px;
 			}
 			#menu li a.wrench{
-				padding: 0 9px 0 10px;
+				padding: 0 6px 0 7px;
 			}
 
 
 /* Columns */
 	#column_area{
-		margin-top: 10px;
+		margin-top: 0px;
 		display: block;
 	}
 		.column{
-			width: 21.5%;
-			padding: 0 1%;
-			margin: 0 1%;
+			width: 210px;
+			padding: 5px;
+			margin: 10px;
 			float: left;
 		}
 		.column.semiwide{
-			width: 30%;
+			width: 290px;
 		}
 		.column.wide{
-			width: 46.5%;
+			width: 450px;
 		}
 		.column:first-child{
 			margin-left: 0;
@@ -82,9 +86,12 @@ body{
 
 /* Widgets */
 	.widget{
-		margin: 25px 0 10px 0;
+		margin-bottom: 25px;
 		color: #FFF;
 		display: none;
+	}
+	.widget:last-child{
+		margin-bottom: 0;
 	}
 		.widget a{
 			color: inherit;
