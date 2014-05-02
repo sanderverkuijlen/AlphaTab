@@ -1,7 +1,7 @@
 @font-face {
 	font-family: 'IconicStroke';
-	src: url('../css/icons/iconic_stroke.eot');
-	src: local('IconicStroke'), url('../css/icons/iconic_stroke.svg#iconic') format('svg'),url('../css/icons/iconic_stroke.otf') format('opentype'); }
+	src: url('iconic_stroke.eot');
+	src: local('IconicStroke'), url('iconic_stroke.svg#iconic') format('svg'),url('iconic_stroke.otf') format('opentype'); }
 
 .iconic { display:inline-block; font-family: 'IconicStroke'; }
 .iconic.hash:before {content:'\23';}

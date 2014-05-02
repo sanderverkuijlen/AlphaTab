@@ -1,14 +1,14 @@
 {
-    "name": "Kickstart",
-    "version": "0.1",
+    "name": "AlphaTab",
+    "version": "0.0.1",
     "description": "",
+    "manifest_version": 2,
 	"chrome_url_overrides": {
-		"newtab": "pages/newtab.html"
+		"newtab": "newtab.html"
 	},
 	"permissions": [
-		"http://*/*",
-		"https://*/*",
 		"bookmarks",
+		"topSites",
 		"management",
 		"chrome://favicon/"
 	]

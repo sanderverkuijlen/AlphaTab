@@ -1,22 +1,17 @@
-KICKSTART
+AlphaTab
 
 
-MUST HAVE
+= Must have =
 - Settings dialog for individual widgets (show/hide/remove (remove = gmail/rss only), change title, max unread mails, max rss articles, etc)
 
-SHOULD HAVE
+= Should have =
 - Settings dialog for individual bookmarks (show/hide, change title/url)
 - Help pop-up
 
-COULD HAVE
+= Could have =
+
+= Want to have =
 
 
-WANT TO HAVE
-
-
-TODO
-- Use "max-items" for RSS feeds
-
-
-BUGS
+= Bugs =
 - No known bugs
