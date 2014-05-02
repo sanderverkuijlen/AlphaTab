@@ -1,39 +1,30 @@
-app.controller('ViewCtrl', ['$scope', function($scope){
+app.controller('ViewCtrl', ['$scope', '$filter', function($scope, $filter){
 
-    $scope.theme = 1;
-    $scope.theme = [
+    //Theme select
+    $scope.theme_id = 1;
+    $scope.themes = [
         {   id:         1,
             name:       'Blue strokes',
             class:      'bluestrokes'
         }
     ];
+    $scope.theme = function(){
+        return $filter('getById')($scope.themes, $scope.theme_id);
+    };
 
-    $scope.layout = 1;
+    //Column-layout
+    $scope.layout_id = 1;
     $scope.layouts = [
         {   id:         1,
             name:       'Default',
             template:   'default'
         }
     ];
+    $scope.layout = function(){
+        return $filter('getById')($scope.layouts, $scope.layout_id);
+    };
 
-    $scope.columns = [
-        {   id:     1,
-            type:   'normal'
-        },
-        {   id:     2,
-            type:   'wide'
-        },
-        {   id:     3,
-            type:   'normal'
-        },
-        {   id:     4,
-            type:   'normal'
-        },
-        {   id:     5,
-            type:   'normal'
-        }
-    ];
-
+    //Widgets
     $scope.widgets = [
         {   id:         1,
             column_id:  1,
@@ -72,5 +63,4 @@ app.controller('ViewCtrl', ['$scope', function($scope){
             type:       'bookmarks'
         }
     ];
-
 }]);
