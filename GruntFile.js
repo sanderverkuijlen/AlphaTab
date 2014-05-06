@@ -6,13 +6,10 @@ module.exports = function(grunt) {
             dist: {
                 src: [  'src/js/vendor/angular.min.js',
                         'src/js/app.js',
-                        'src/js/controllers/view.js',
-                        'src/js/directives/list.js',
-                        'src/js/directives/widgets/bookmark_widget.js',
-                        'src/js/directives/widgets/calendar_widget.js',
-                        'src/js/directives/widgets/clock_widget.js',
-                        'src/js/directives/widgets/topsites_widget.js',
-                        'src/js/filters/get_by_id.js'
+                        'src/js/controllers/**/*.js',
+                        'src/js/directives/**/*.js',
+                        'src/js/filters/**/*.js',
+                        'src/js/services/**/*.js'
                 ],
                 dest: 'extension/js/script.js'
             }
@@ -30,7 +27,8 @@ module.exports = function(grunt) {
                             'src/js/app.js',
                             'src/js/controllers/**/*.js',
                             'src/js/directives/**/*.js',
-                            'src/js/filters/**/*.js'
+                            'src/js/filters/**/*.js',
+                            'src/js/services/**/*.js'
                 ],
                 tasks: ['concat']
             },

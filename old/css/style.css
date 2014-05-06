@@ -1,20 +1,20 @@
 
 body{
-	font-family: Segoe UI, arial, sans-serif;
-	font-size: 14px;
-	/*font-smooth:always;*/
-	-webkit-font-smoothing: antialiased;
+     font-family: Segoe UI, arial, sans-serif;
+     font-size: 14px;
+     /*font-smooth:always;*/
+     -webkit-font-smoothing: antialiased;
 
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
-	user-select: none;
+     -webkit-user-select: none;
+     -khtml-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     -o-user-select: none;
+     user-select: none;
 
-	cursor: default;
-	overflow-y:scroll;
-}
+     cursor: default;
+     overflow-y:scroll;
+ }
 
     #content{
 		width: 940px;

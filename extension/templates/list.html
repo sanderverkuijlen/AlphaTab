@@ -1,2 +1,10 @@
 
-<li>{{column_id}}</li>
+    {{widgets.length}}
+    {{widgets}}
+
+    <li ng-repeat="widget in widgets" ng-switch="widget.type">
+        <div my-clock-widget ng-switch-when="clock"></div>
+        <div my-calendar-widget ng-switch-when="calendar"></div>
+        <div my-topsites-widget ng-switch-when="topsites"></div>
+        <div my-bookmark-widget ng-switch-when="bookmark"></div>
+    </li>
