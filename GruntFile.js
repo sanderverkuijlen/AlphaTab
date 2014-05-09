@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         concat: {
             dist: {
-                src: [  'src/js/vendor/angular.min.js',
+                src: [  'src/js/vendor/**/*.js',
                         'src/js/app.js',
                         'src/js/controllers/**/*.js',
                         'src/js/directives/**/*.js',
@@ -23,7 +23,7 @@ module.exports = function(grunt) {
         },
         watch: {
             concat: {
-                files: [    'src/js/vendor/angular.min.js',
+                files: [    'src/js/vendor/**/*.js',
                             'src/js/app.js',
                             'src/js/controllers/**/*.js',
                             'src/js/directives/**/*.js',

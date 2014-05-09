@@ -28,7 +28,7 @@ app.service('Widgets', ['$filter', function($filter){
     this.getByList = function(list_id){
 
         var filtered_list = $filter('filter')(this.widgets, {list_id: list_id});
-        filtered_list = $filter('orderBy')(list, 'list_position');
+        filtered_list = $filter('orderBy')(filtered_list, 'list_position');
 
         return filtered_list;
     };

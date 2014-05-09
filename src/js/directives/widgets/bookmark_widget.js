@@ -4,8 +4,8 @@ app.directive('myBookmarkWidget', function(){
         templateUrl:    'templates/widgets/bookmark.html',
         controller:     function($scope, Bookmarks){
 
-            console.log('test');
-            Bookmarks.test();
+//            console.log('test');
+//            Bookmarks.test();
         }
     };
 });
