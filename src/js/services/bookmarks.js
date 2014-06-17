@@ -19,7 +19,7 @@ app.service('Bookmarks', [function(){
             }
 
             if(typeof node.children !== 'undefined' && node.children.length > 0){
-                nodeMapper(node['children']);
+                nodeMapper(node.children);
             }
         });
     };

@@ -3,13 +3,12 @@
 <head>
     <title>AlphaTab</title>
 
-    <link href="css/style.css" rel="stylesheet" type="text/css">
-
-    <script src="js/script.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body ng-controller="ViewCtrl" ng-class="theme_{{themes.current().class}}">
 
     <div ng-include="'templates/layouts/'+layouts.current().template+'.html'"></div>
 
+    <script src="script.js"></script>
 </body>
 </html>
