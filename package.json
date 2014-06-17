@@ -23,6 +23,12 @@
     "gulp-uglify": "~0.3.0",
     "gulp-clean": "~0.3.0",
     "gulp-jshint": "~1.6.3",
-    "jshint-stylish": "~0.2.0"
+    "jshint-stylish": "~0.2.0",
+    "karma": "~0.12.16",
+    "karma-jasmine": "~0.1.5",
+    "karma-chrome-launcher": "~0.1.4",
+    "phantomjs": "~1.9.7-8",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "gulp-karma": "0.0.4"
   }
 }
