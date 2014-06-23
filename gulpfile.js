@@ -7,7 +7,7 @@ var sass = require('gulp-sass'),
 	concat = require('gulp-concat'),
 	uglify = require('gulp-uglify'),
 	jshint = require('gulp-jshint'),
-	karma = require('gulp-karma');
+	karma = require('karma').server;
 
 
 //Task input
@@ -31,7 +31,7 @@ var styles_src = [
 		'src/script/services/**/*.js'
 	],
 	karma_src = [
-		'src/script/tests/**/*.js',
+		'src/script/tests/**/*.js'
 	];
 
 
@@ -58,16 +58,24 @@ gulp.task('scripts', function(){
 });
 
 gulp.task('tests', function(){
+
+	//Run JShint
 	gulp.src(jshint_src)
 		.pipe(jshint())
-		.pipe(jshint.reporter('jshint-stylish'))
-		.pipe(karma({
-			configFile: 'karma.conf.js'
-		}))
-		.on('error', function(err) {
-			// Make sure failed tests cause gulp to exit non-zero
-			throw err;
-		});;
+		.pipe(jshint.reporter('jshint-stylish'));
+
+	//Run tests
+	karma.start({
+		configFile: process.cwd()+'/karma.conf.js'
+	});
+//	gulp.src(scripts_src)
+//		.pipe(karma({
+//			configFile: 'karma.conf.js'
+//		}))
+//		.on('error', function(err){
+//			// Make sure failed tests cause gulp to exit non-zero
+//			throw err;
+//		});
 });
 
 gulp.task('watch', function(){
