@@ -15,8 +15,8 @@ var styles_src = [
 		'src/style/style.scss'
 	],
 	scripts_src = [
-		'src/script/vendor/angular.min.js',
-		'src/script/vendor/angular-mocks.js',
+		'src/script/vendor/angular/angular.min.js',
+		'src/script/vendor/angular-mocks/angular-mocks.js',
 		'src/script/app.js',
 		'src/script/controllers/**/*.js',
 		'src/script/directives/**/*.js',
@@ -68,14 +68,6 @@ gulp.task('tests', function(){
 	karma.start({
 		configFile: process.cwd()+'/karma.conf.js'
 	});
-//	gulp.src(scripts_src)
-//		.pipe(karma({
-//			configFile: 'karma.conf.js'
-//		}))
-//		.on('error', function(err){
-//			// Make sure failed tests cause gulp to exit non-zero
-//			throw err;
-//		});
 });
 
 gulp.task('watch', function(){
