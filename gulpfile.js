@@ -6,15 +6,16 @@ var sass = require('gulp-sass'),
 	minifyCSS = require('gulp-minify-css'),
 	concat = require('gulp-concat'),
 	uglify = require('gulp-uglify'),
+	zip = require('gulp-zip'),
 	jshint = require('gulp-jshint'),
 	karma = require('karma').server;
 
 
 //Task input
-var styles_src = [
+var style_src = [
 		'src/style/style.scss'
 	],
-	scripts_src = [
+	script_src = [
 		'bower_components/angular/angular.min.js',
 		'bower_components/angular-mocks/angular-mocks.js',
 		'src/script/app.js',
@@ -30,20 +31,19 @@ var styles_src = [
 		'src/script/filters/**/*.js',
 		'src/script/services/**/*.js'
 	],
-	karma_src = [
-		'tests/**/*.js'
-	];
+	karma_src = 'tests/**/*.js',
+	zip_src = 'extension/**/*.*';
 
 
 //Tasks
-gulp.task('styles', function(){
-	gulp.src(styles_src)
+gulp.task('style', function(){
+	gulp.src(style_src)
 		.pipe(sass())
 		.pipe(minifyCSS())
 		.pipe(gulp.dest('extension'));
 });
 
-gulp.task('scripts', function(){
+gulp.task('script', function(){
 
 	//Run tests
 	gulp.src(jshint_src)
@@ -51,13 +51,20 @@ gulp.task('scripts', function(){
 		.pipe(jshint.reporter('jshint-stylish'));
 
 	//Build
-	gulp.src(scripts_src)
+	gulp.src(script_src)
 		.pipe(concat('script.js'))
 		.pipe(uglify({mangle: false}))
 		.pipe(gulp.dest('extension'));
 });
 
-gulp.task('tests', function(){
+gulp.task('zip', function(){
+
+	gulp.src(zip_src)
+		.pipe(zip('AlphaTab.zip'))
+		.pipe(gulp.dest('dist'));
+});
+
+gulp.task('test', function(){
 
 	//Run JShint
 	gulp.src(jshint_src)
@@ -66,14 +73,25 @@ gulp.task('tests', function(){
 
 	//Run tests
 	karma.start({
-		configFile: process.cwd()+'/karma.conf.js'
+		configFile: process.cwd() + '/karma.conf.js'
 	});
 });
 
-gulp.task('watch', function(){
-	gulp.watch(styles_src, ['styles']);
-	gulp.watch([jshint_src, scripts_src], ['scripts']);
-	gulp.watch(karma_src, ['tests']);
-});
+gulp.task('build', [
+	'styles',
+	'scripts',
+	'zip'
+]);
 
+gulp.task('watch', function(){
+
+	gulp.watch(style_src, ['style']);
+
+	gulp.watch([
+		jshint_src,
+		script_src
+	], ['script']);
+
+	gulp.watch(karma_src, ['test']);
+});
 gulp.task('default', ['watch']);
