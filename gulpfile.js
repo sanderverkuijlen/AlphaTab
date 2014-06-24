@@ -15,8 +15,8 @@ var styles_src = [
 		'src/style/style.scss'
 	],
 	scripts_src = [
-		'src/script/vendor/angular/angular.min.js',
-		'src/script/vendor/angular-mocks/angular-mocks.js',
+		'bower_components/angular/angular.min.js',
+		'bower_components/angular-mocks/angular-mocks.js',
 		'src/script/app.js',
 		'src/script/controllers/**/*.js',
 		'src/script/directives/**/*.js',
@@ -31,7 +31,7 @@ var styles_src = [
 		'src/script/services/**/*.js'
 	],
 	karma_src = [
-		'src/script/tests/**/*.js'
+		'tests/**/*.js'
 	];
 
 
@@ -73,7 +73,7 @@ gulp.task('tests', function(){
 gulp.task('watch', function(){
 	gulp.watch(styles_src, ['styles']);
 	gulp.watch([jshint_src, scripts_src], ['scripts']);
-	gulp.watch([karma_src], ['tests']);
+	gulp.watch(karma_src, ['tests']);
 });
 
 gulp.task('default', ['watch']);
