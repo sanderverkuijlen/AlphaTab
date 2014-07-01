@@ -12,7 +12,10 @@ var sass = require('gulp-sass'),
 
 
 //Task input
-var style_src = [
+var style_watch = [
+		'src/style/**/*.scss'
+	],
+	style_src = [
 		'src/style/style.scss'
 	],
 	script_src = [
@@ -78,14 +81,14 @@ gulp.task('test', function(){
 });
 
 gulp.task('build', [
-	'styles',
-	'scripts',
+	'style',
+	'script',
 	'zip'
 ]);
 
 gulp.task('watch', function(){
 
-	gulp.watch(style_src, ['style']);
+	gulp.watch(style_watch, ['style']);
 
 	gulp.watch([
 		jshint_src,

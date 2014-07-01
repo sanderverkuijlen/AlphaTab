@@ -1,7 +1,5 @@
 app.controller('ViewCtrl', ['$scope', '$filter', function($scope, $filter){
 
-	$scope.test = 'Hello World!2';
-
     //Theme select
     $scope.themes = {
         current_id: 1,

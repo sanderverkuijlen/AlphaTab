@@ -1,0 +1,32 @@
+body.layout_default{
+	.column{
+		margin: 40px 2.5% 40px 0;
+
+		float: left;
+		width: 30%;
+
+		&:first-child{
+			margin-left: 2.5%;
+		}
+
+		.list{
+			margin-top: 40px;
+
+			&:first-child{
+				margin-top: 0;
+			}
+
+			li{
+				margin-top: 40px;
+
+				&:first-child{
+					margin-top: 0;
+				}
+
+				.widget{
+					padding: 20px;
+				}
+			}
+		}
+	}
+}

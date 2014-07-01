@@ -5,7 +5,7 @@
 
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
-<body ng-controller="ViewCtrl" ng-class="theme_{{themes.current().class}}">
+<body ng-controller="ViewCtrl" class="theme_{{themes.current().class}} layout_{{layouts.current().class}}">
 
     <div ng-include="'templates/layouts/'+layouts.current().template+'.html'"></div>
 
