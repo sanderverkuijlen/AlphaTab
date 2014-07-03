@@ -24,6 +24,7 @@ app.controller('ViewCtrl', ['$scope', '$filter', function($scope, $filter){
             {   id:         1,
                 name:       'Default',
                 template:   'default',
+                class:      'default',
                 lists:      [
                     {   id:         1,
                         widgets:    [4,5]

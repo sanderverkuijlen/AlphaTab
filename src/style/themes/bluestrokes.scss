@@ -1,11 +1,35 @@
-body.theme_bluestrokes{
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
+
+body.theme_bluestrokes {
+	font-family: 'Open Sans', sans-serif;
 	background: url('img/bg_blue_strokes2.jpg');
 
-	.column{
-		.list{
-			.widget{
-				color: white;
-				background: rgba(0,0,0,0.5);
+	.column {
+		.widget {
+			margin-top: 20px;
+			padding: 20px;
+			color: white;
+			background: rgba(0, 0, 0, 0.5);
+
+			h1{
+				font-weight: 300;
+				font-size: 20px;
+				margin-bottom: 20px;
+			}
+			ul{
+				padding-left: 18px;
+
+				li{
+					list-style: square;
+					line-height: 25px;
+
+					a{
+						font-size: 14px;
+						color: white;
+						vertical-align: bottom;
+					}
+				}
 			}
 		}
 	}
