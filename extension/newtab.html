@@ -5,9 +5,65 @@
 
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
-<body ng-controller="ViewCtrl" class="theme_{{themes.current().class}} layout_{{layouts.current().class}}">
+<body ng-controller="ViewCtrl" class="theme_{{themes.current().class}}">
 
-    <div ng-include="'templates/layouts/'+layouts.current().template+'.html'"></div>
+	<ul class="widget_list">
+
+		<li class="w_25">
+			<ul>
+				<li class="drop_target"></li>
+
+				<li class="widget w_50">widget</li>
+
+				<li class="drop_target"></li>
+
+				<li class="widget w_50">widget</li>
+
+				<li class="drop_target"></li>
+
+				<li class="widget w_50">widget</li>
+
+				<li class="drop_target"></li>
+			</ul>
+		</li>
+
+		<li class="w_50">
+			<ul>
+				<li class="drop_target"></li>
+
+				<li class="widget">widget</li>
+
+				<li class="drop_target"></li>
+
+				<li class="widget w_40">widget</li>
+
+				<li class="drop_target"></li>
+
+				<li class="widget w_40">widget</li>
+
+				<li class="drop_target"></li>
+			</ul>
+		</li>
+
+		<li class="w_25">
+			<ul>
+				<li class="drop_target"></li>
+
+				<li class="widget">widget</li>
+
+				<li class="drop_target"></li>
+
+				<li class="widget">widget</li>
+
+				<li class="drop_target"></li>
+
+				<li class="widget">widget</li>
+
+				<li class="drop_target"></li>
+			</ul>
+		</li>
+
+	</ul>
 
     <script src="script.js"></script>
 </body>
