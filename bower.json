@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "dependencies": {
     "angular": "~1.2.18",
-    "angular-mocks": "~1.2.18"
+    "angular-mocks": "~1.2.18",
+    "angular-ui-sortable": "~0.12.8",
+    "jquery": "~2.1.1",
+    "jquery-ui": "~1.11.0"
   },
   "devDependencies": {}
 }

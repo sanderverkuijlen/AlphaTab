@@ -19,6 +19,11 @@ var style_watch = [
 		'src/style/style.scss'
 	],
 	script_src = [
+		'bower_components/jquery/dist/jquery.min.js',
+		'bower_components/jquery-ui/ui/minified/core.min.js',
+		'bower_components/jquery-ui/ui/minified/widget.min.js',
+		'bower_components/jquery-ui/ui/minified/mouse.min.js',
+		'bower_components/jquery-ui/ui/minified/sortable.min.js',
 		'bower_components/angular/angular.min.js',
 		'bower_components/angular-mocks/angular-mocks.js',
 		'src/script/app.js',
