@@ -1,40 +1,55 @@
-.widget_list{
-	margin: 20px;
+#widget_view{
+	@include clearfix();
 
 	> li{
 		float: left;
+		padding: 10px 10px 10px 0;
 
-		&.w_50{
+		&:first-child{
+			padding-left: 10px;
+		}
+	}
+}
+
+.sortable{
+	@include clearfix();
+
+	li{
+		width: 100%;
+
+		&.w50{
 			width: 50%;
 		}
-
-		&.w_25{
+		&.w25{
 			width: 25%;
 		}
+		&.w33{
+			width: 33.3333%;
+		}
 
-		> ul{
-			display: table;
-			width: 100%;
+		div{
+			margin-top: 10px;
+			padding: 10px;
 
-			> li{
-				display: table-cell;
-				margin: 0 10px;
+			//THEME
+			background: rgba(1, 1, 1, 0.4);
+			color: white;
+			//END THEME
+		}
+	}
 
-				&.drop_target{
-					width: 20px;
-					background: rgba(255,255,255,0.4);
+	&.horizontal{
+		> li{
+			float: left;
+			padding-right: 10px;
 
-					&:first-child:last-child{
-						width: 100%;
-						height: 20px;
-					}
-				}
-
-				&.widget{
-					background: rgba(0,0,0,0.4);
-					height: 100px;
-				}
+			&:last-child{
+				padding-right: 0;
 			}
+		}
+	}
+	&.vertical{
+		> li{
 		}
 	}
 }

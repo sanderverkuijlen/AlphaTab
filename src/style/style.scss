@@ -1,6 +1,11 @@
 
-//Reset and libraries
+//Libraries
+@import 'lib';
+
+//CSS reset
 @import 'reset';
+
+//Default box-sizing to border-box
 @import 'box-sizing';
 
 //Base layout
