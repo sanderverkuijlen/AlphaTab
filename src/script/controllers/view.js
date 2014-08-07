@@ -1,6 +1,34 @@
 app.controller('ViewCtrl', ['$scope', '$filter', function($scope, $filter){
 
-    //Theme select
+	$scope.sortableOptions = {
+		test: 'test'
+	};
+
+	$scope.widgets = [
+		[
+			{widget: '1'},
+			{widget: '2'},
+			{widget: '3'}
+		],
+		[
+			{widget: '1'},
+			[
+				{widget: '2'},
+				{widget: '3'}
+			],
+			{widget: '4'},
+			[
+				{widget: '5'},
+				{widget: '6'}
+			]
+		],
+		[
+			{widget: '1'},
+			{widget: '2'},
+			{widget: '3'}
+		]
+	];
+
     $scope.themes = {
         current_id: 1,
         current:        function(){

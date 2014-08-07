@@ -1,110 +1,118 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="app" ng-csp="">
 <head>
-    <title>AlphaTab</title>
+	<title>AlphaTab</title>
 
-    <link href="style.css" rel="stylesheet" type="text/css">
+	<link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body ng-controller="ViewCtrl" class="theme_{{themes.current().class}}">
 
-	<ul id="widget_view" class="sortable horizontal">
+<div my-widget-list id="widget_view" items="items" sortable-options="sortableOptions"></div>
+<!--
+<ul id="widget_view" ui-sortable="sortableOptions" ng-model="items" class="sortable horizontal">
+	<li ng-repeat="item in items">
+		{{ item }}
+	</li>
+</ul>
+-->
 
-		<li class="w25">
-			<ul class="sortable vertical">
-				<li>
-					<ul class="sortable horizontal">
-						<li>
-							<div>widget<br>a<br>a</div>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<ul class="sortable horizontal">
-						<li>
-							<div>widget<br>a<br>a</div>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<ul class="sortable horizontal">
-						<li>
-							<div>widget<br>a<br>a</div>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</li>
+<!--
+<ul id="widget_view" class="sortable horizontal">
 
-		<li class="w50">
-			<ul class="sortable vertical">
-				<li>
-					<ul class="sortable horizontal">
-						<li>
-							<div>widget<br>a<br>a</div>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<ul class="sortable horizontal">
-						<li class="w50">
-							<div>widget<br>a<br>a<br>a</div>
-						</li>
-						<li class="w50">
-							<div>widget<br>a<br>a<br>a<br>a<br>a<br>a</div>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<ul class="sortable horizontal">
-						<li>
-							<div>widget<br>a<br>a</div>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<ul class="sortable horizontal">
-						<li class="w33">
-							<div>widget<br>a<br>a<br>a</div>
-						</li>
-						<li class="w33">
-							<div>widget<br>a<br>a<br>a<br>a<br>a<br>a</div>
-						</li>
-						<li class="w33">
-							<div>widget<br>a<br>a<br>a<br>a<br>a<br>a</div>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</li>
+	<li class="w25">
+		<ul class="sortable vertical">
+			<li>
+				<ul class="sortable horizontal">
+					<li>
+						<div>widget<br>a<br>a</div>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<ul class="sortable horizontal">
+					<li>
+						<div>widget<br>a<br>a</div>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<ul class="sortable horizontal">
+					<li>
+						<div>widget<br>a<br>a</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
 
-		<li class="w25">
-			<ul class="sortable vertical">
-				<li>
-					<ul class="sortable horizontal">
-						<li>
-							<div>widget<br>a<br>a</div>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<ul class="sortable horizontal">
-						<li>
-							<div>widget<br>a<br>a</div>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<ul class="sortable horizontal">
-						<li>
-							<div>widget<br>a<br>a</div>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</li>
+	<li class="w50">
+		<ul class="sortable vertical">
+			<li>
+				<ul class="sortable horizontal">
+					<li>
+						<div>widget<br>a<br>a</div>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<ul class="sortable horizontal">
+					<li class="w50">
+						<div>widget<br>a<br>a<br>a</div>
+					</li>
+					<li class="w50">
+						<div>widget<br>a<br>a<br>a<br>a<br>a<br>a</div>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<ul class="sortable horizontal">
+					<li>
+						<div>widget<br>a<br>a</div>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<ul class="sortable horizontal">
+					<li class="w50">
+						<div>widget<br>a<br>a<br>a</div>
+					</li>
+					<li class="w50">
+						<div>widget<br>a<br>a<br>a<br>a<br>a<br>a</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
 
-	</ul>
+	<li class="w25">
+		<ul class="sortable vertical">
+			<li>
+				<ul class="sortable horizontal">
+					<li>
+						<div>widget<br>a<br>a</div>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<ul class="sortable horizontal">
+					<li>
+						<div>widget<br>a<br>a</div>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<ul class="sortable horizontal">
+					<li>
+						<div>widget<br>a<br>a</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
 
-    <script src="script.js"></script>
+</ul>
+-->
+
+<script src="script.js"></script>
 </body>
 </html>

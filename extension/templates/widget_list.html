@@ -1,0 +1,13 @@
+
+<ul id="{{id}}" xui-sortable="sortableOptions" xng-model="items" ng-class="{'sortable': true, 'horizontal': horizontal}">
+	<li ng-repeat="item in items track by $index">
+		{{horizontal ? 'a' : 'b'}}
+
+		{{item}}
+
+		<!--
+		<div my-widget-list my-widget-list-items="item" my-widget-list-sortable-options="sortableOptions" my-widget-list-horizontal="!horizontal"></div>
+		-->
+
+	</li>
+</ul>
